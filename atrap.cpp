@@ -435,19 +435,18 @@ int main(int argc,char *argv[])
 {
 	uint16_t i, n;
 	trap *p;
-	if (argc == 2 &&
-			sscanf(argv[1],"%hX",&i) == 1 &&
-			i >= 0xA000 &&
-			i <= 0xAAA1)
+	if (argc == 2 && sscanf(argv[1],"%hX",&i) == 1)
 	{
         printf("Get input A-Trap number: %4X\n", i);
-		if (i > 0xA800) {
+		if (i > 0xA800 && i <= 0xAAA1) {
             uint16_t offset = i - 0xA801;
             uint16_t index = offset + 0x91;
 			printf("%4X %s\n",list[index].num,list[index].name);
-        } else {
+        } else if (i >= 0xA000 && i <= 0xA090) {
             uint16_t index = i - 0xA000;
 			printf("%4X %s\n",list[index].num,list[index].name);
+        } else {
+            printf("Undefined A-Trap.\n");
         }
 		return 0;
 	}

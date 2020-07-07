@@ -446,7 +446,7 @@ int main(int argc,char *argv[])
             uint16_t index = i - 0xA000;
 			printf("%4X %s\n",list[index].num,list[index].name);
         } else {
-            printf("Undefined A-Trap.\n");
+            printf("Invalid A-Trap number.\n");
         }
 		return 0;
 	}
